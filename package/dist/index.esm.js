@@ -12,17 +12,11 @@ import { nanoid } from 'nanoid/non-secure';
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function (obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof = function (obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-
-  return _typeof(obj);
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, _typeof(obj);
 }
 
 var config = {
@@ -53,8 +47,8 @@ var TargetContainer = Vue.extend({
     return nodes.length === 1 && !nodes[0].text ? nodes : h(this.tag || 'DIV', nodes);
   },
   destroyed: function destroyed() {
-    var el = this.$el;
-    el && el.parentNode.removeChild(el);
+    var el = this.$el.parentNode ? this.$el : this.updatedNodes()[0].elm;
+    el.parentNode.removeChild(el);
   }
 });
 

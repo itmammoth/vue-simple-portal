@@ -19,7 +19,7 @@ export default Vue.extend({
     return nodes.length === 1 && !nodes[0].text ? nodes : h(this.tag || 'DIV', nodes);
   },
   destroyed: function destroyed() {
-    var el = this.$el;
-    el && el.parentNode.removeChild(el);
+    var el = this.$el.parentNode ? this.$el : this.updatedNodes()[0].elm;
+    el.parentNode.removeChild(el);
   }
 });
