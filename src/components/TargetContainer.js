@@ -19,7 +19,7 @@ export default Vue.extend({
       : h(this.tag || 'DIV', nodes)
   },
   destroyed() {
-    const { $el: el } = this
-    el && el.parentNode.removeChild(el)
+    const el = this.$el.parentNode ? this.$el : this.updatedNodes()[0].elm
+    el.parentNode.removeChild(el)
   },
 })
